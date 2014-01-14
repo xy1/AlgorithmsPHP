@@ -1,9 +1,9 @@
 <?php
 
 /*
-Solution to a programming test exercise:
+Solution to a coding test exercise:
 
-"Create a new Request Header based on the clients IP address in order to determine the users network. (Keeping in mind that you user might be behind a proxy server.)
+Exercise: "Create a new Request Header based on the clients IP address in order to determine the users network. (Keeping in mind that you user might be behind a proxy server.)
 Based on the value and existence of this request header modify the page output to show certain values about the clients network. (Pick any sample values you might think are valuable.)
 Make sure that you don't serve the incorrect page contents to any user.
 Use at least 4 different carrier networks."
