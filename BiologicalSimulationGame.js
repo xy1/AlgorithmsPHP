@@ -1,84 +1,3 @@
-<html>
-<style>
-.main {
-	background-color: #000000;
-	color: #FFFFFF;
-	padding: 30px;
-	font-family: "Courier",sans-serif;
-	font-size: 16pt;
-}
-canvas {
-	cursor: crosshair;
-}
-.titlebox {
-	color: red;
-}
-.box {
-	border-color: #FFFFFF;
-	border-width: 0px;
-	border-style: dashed;
-	padding: 2px;
-}
-.controlpanel {
-	font-size: 80%;
-}
-.buttonstyle {
-	text-decoration: none;
-	background-color: #333333;
-	color: red;
-	padding: 7px;
-	font-family: "Courier",sans-serif;
-	font-size: 100%;
-	border-color: red;
-	border-width: 1px;
-	border-style: solid;
-}
-</style>
-<script type=text/javascript>
-function PlaySound(which) {  // 0 is wounding sound and 1 is killing sound
-	s = new Array (
-		'Beep_12%20-%20JewelBeat.mp3',
-		'Beep_20%20-%20JewelBeat.mp3',
-		'Beep_04%20-%20JewelBeat.mp3'
-	);
-	if (which == 0) { r = 0; }
-	else { r = 2; }
-	document.getElementById("sound").innerHTML = "<embed src=http://www.jewelbeat.com/free/free-sound-effects/buttons/" + s[r] +
-		" autostart=true hidden=true loop=false></embed>";
-}
-</script>
-</head>
-
-<body class=main>
-<div class=titlebox>PATHOGENS</div>
-<br/>
-<div id=scoreboard_label class=box>Pathogens: <span id=scoreboard></span>
-&nbsp;
-Phages: <span id=phagecount></span>
-&nbsp;
-Host Strength: <span id=chewedscore></span>
-</div>
-
-<div id=controlpanel class=controlpanel style='position:absolute; left:685px; top: 150px;'>
-<input type=button value='Instructions' onclick="ShowLoading('<br/><br/> &bull; Kill all pathogens to save host. <br/><br/> &bull; Kill pathogens with phages.<br/><br/> &bull; Kill pathogens with death beam.<br/><br/> &bull; Use your beam to guide them; <br/> &nbsp; move mouse to position.<br/><br/> &bull; Use your phageduct as a barrier; <br/> &nbsp; click to position. <br/><br/> ', 9);" class='buttonstyle'>
-<br/><br/>
-<input type=button value='Restart' onclick='RestartGame();' class='buttonstyle'>
-<br/><br/>
-<input type=button value='Redesign Phageduct' onclick='ShowLoading("Redesigning...", 1);InitializeWall();' class='buttonstyle'>
-<br/><br/>
-<input type=button value='Release Phage' onclick='ReleasePhage();' class='buttonstyle'>
-<br/><br/>
-<input type=button id=highbeamon name=highbeamon value='Activate Death Beam' onclick='ToggleHighBeam(1)' class='buttonstyle'>
-<input type=button id=highbeamoff name=highbeamoff value='Deactivate Death Beam' onclick='ToggleHighBeam(0);' class='buttonstyle' style='display: none;'>
-<br/><br/>
-<input type=button id=enlargebeam name=enlargebeam value='Enlarge Beam' onclick='ToggleBeamSize(1)' class='buttonstyle'>
-<input type=button id=shrinkbeam name=shrinkbeam value='Shrink Beam' onclick='ToggleBeamSize(0);' class='buttonstyle' style='display: none;'>
-<br/><br/>
-<input type=button id=inctemp name=inctemp value='Increase Temperature' onclick='ToggleTemp(0.5)' class='buttonstyle'>
-<input type=button id=dectemp name=dectemp value='Decrease Temperature' onclick='ToggleTemp(1);' class='buttonstyle' style='display: none;'>
-
-</div>
-
 <script type=text/javascript>
 
 function ToggleTemp(setting) {
@@ -700,3 +619,80 @@ ShowLoading("Loading...", 3);
 PlaySound(1);
 
 </script>
+<style>
+.main {
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 30px;
+	font-family: "Courier",sans-serif;
+	font-size: 16pt;
+}
+canvas {
+	cursor: crosshair;
+}
+.titlebox {
+	color: red;
+}
+.box {
+	border-color: #FFFFFF;
+	border-width: 0px;
+	border-style: dashed;
+	padding: 2px;
+}
+.controlpanel {
+	font-size: 80%;
+}
+.buttonstyle {
+	text-decoration: none;
+	background-color: #333333;
+	color: red;
+	padding: 7px;
+	font-family: "Courier",sans-serif;
+	font-size: 100%;
+	border-color: red;
+	border-width: 1px;
+	border-style: solid;
+}
+</style>
+<script type=text/javascript>
+function PlaySound(which) {  // 0 is wounding sound and 1 is killing sound
+	s = new Array (
+		'Beep_12%20-%20JewelBeat.mp3',
+		'Beep_20%20-%20JewelBeat.mp3',
+		'Beep_04%20-%20JewelBeat.mp3'
+	);
+	if (which == 0) { r = 0; }
+	else { r = 2; }
+	document.getElementById("sound").innerHTML = "<embed src=http://www.jewelbeat.com/free/free-sound-effects/buttons/" + s[r] +
+		" autostart=true hidden=true loop=false></embed>";
+}
+</script>
+
+<body class=main>
+<div class=titlebox>PATHOGENS</div>
+<br/>
+<div id=scoreboard_label class=box>Pathogens: <span id=scoreboard></span>
+&nbsp;
+Phages: <span id=phagecount></span>
+&nbsp;
+Host Strength: <span id=chewedscore></span>
+</div>
+
+<div id=controlpanel class=controlpanel style='position:absolute; left:685px; top: 150px;'>
+<input type=button value='Instructions' onclick="ShowLoading('<br/><br/> &bull; Kill all pathogens to save host. <br/><br/> &bull; Kill pathogens with phages.<br/><br/> &bull; Kill pathogens with death beam.<br/><br/> &bull; Use your beam to guide them; <br/> &nbsp; move mouse to position.<br/><br/> &bull; Use your phageduct as a barrier; <br/> &nbsp; click to position. <br/><br/> ', 9);" class='buttonstyle'>
+<br/><br/>
+<input type=button value='Restart' onclick='RestartGame();' class='buttonstyle'>
+<br/><br/>
+<input type=button value='Redesign Phageduct' onclick='ShowLoading("Redesigning...", 1);InitializeWall();' class='buttonstyle'>
+<br/><br/>
+<input type=button value='Release Phage' onclick='ReleasePhage();' class='buttonstyle'>
+<br/><br/>
+<input type=button id=highbeamon name=highbeamon value='Activate Death Beam' onclick='ToggleHighBeam(1)' class='buttonstyle'>
+<input type=button id=highbeamoff name=highbeamoff value='Deactivate Death Beam' onclick='ToggleHighBeam(0);' class='buttonstyle' style='display: none;'>
+<br/><br/>
+<input type=button id=enlargebeam name=enlargebeam value='Enlarge Beam' onclick='ToggleBeamSize(1)' class='buttonstyle'>
+<input type=button id=shrinkbeam name=shrinkbeam value='Shrink Beam' onclick='ToggleBeamSize(0);' class='buttonstyle' style='display: none;'>
+<br/><br/>
+<input type=button id=inctemp name=inctemp value='Increase Temperature' onclick='ToggleTemp(0.5)' class='buttonstyle'>
+<input type=button id=dectemp name=dectemp value='Decrease Temperature' onclick='ToggleTemp(1);' class='buttonstyle' style='display: none;'>
+</div>
