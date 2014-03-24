@@ -4,8 +4,7 @@
 //
 // Compares 2 text pages and shows the differences between them
 // Performs similar function to the Linux/Unix "diff" utility
-// Originally intended for a custom version-tracking system, but performance speed was poor, so an alternate approach was used
-// Only taking 8 hours to write, it served as a good coding exercise
+// Done as a problem-solving exercise, not for production code, performance not optimized at all
 //
 // phase 1 of 2
 //
