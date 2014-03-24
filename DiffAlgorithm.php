@@ -36,52 +36,59 @@ function HighlightDifferences( $oPageContent1, $oPageContent2 ) {
         $segments = array ();
         $segment_count = 0;
 
-        while (1 == 1) {
-                $i = 0;
-                $j = 0;
 
-                $longest_start = -1;
-                $longest_length = 0;
-                for ($i = 0; $i <= $l; $i++ ) {
+        $i = 0;
+        $j = 0;
 
-                        // skip over common sections
-                        $skip = 0;
+        $longest_start = -1;
+        $longest_length = 0;
+        for ($i = 0; $i <= $l; $i++ ) {
+
+                // skip over common sections
+                $skip = 0;
+                foreach ( $segments as $s ) {
+                        $tmp_start = substr($s, 0, strpos($s,"for"));
+                        $tmp_length = substr($s, strpos($s,"for") + 3);
+                        if ( $i >= $tmp_start && $i <= $tmp_start + $tmp_length ) { $skip = 1; }
+                }
+                if ( $skip == 1 ) {
+                        continue;
+                }
+
+                $tmp_longest_start = 0;
+                $tmp_longest_length = 0;
+                for ($j = 1; $j <= ($l - $i); $j++ ) {
+
+                        // stop if reached common section
+                        $stop = 0;
                         foreach ( $segments as $s ) {
                                 $tmp_start = substr($s, 0, strpos($s,"for"));
                                 $tmp_length = substr($s, strpos($s,"for") + 3);
-                                if ( $i >= $tmp_start && $i <= $tmp_start + $tmp_length ) { $skip = 1; }
+                                if ( $j >= $tmp_start && $j <= $tmp_start + $tmp_length ) {
+                                        $stop = 1;
+                                }
                         }
-                        if ( $skip == 1 ) { continue; }
 
-                        $tmp_longest_start = 0;
-                        $tmp_longest_length = 0;
-                        for ($j = 1; $j <= ($l - $i); $j++ ) {
-
-                                // stop if reached common section
-                                $stop = 0;
-                                foreach ( $segments as $s ) {
-                                        $tmp_start = substr($s, 0, strpos($s,"for"));
-                                        $tmp_length = substr($s, strpos($s,"for") + 3);
-                                        if ( $j >= $tmp_start && $j <= $tmp_start + $tmp_length ) {
-                                                $stop = 1;
-                                        }
+                        $chunk = substr($oPageContent1, $i, $j );
+                        if ( strpos($oPageContent2,$chunk) !== FALSE ) {
+                                $tmp_longest_start = $i;
+                                $tmp_longest_length = strlen($chunk) - 1;
+                                if ( $tmp_longest_length > $longest_length ) {
+                                        $longest_start = $tmp_longest_start;
+                                        $longest_length = $tmp_longest_length;
                                 }
-
-                                $chunk = substr($oPageContent1, $i, $j );
-                                if ( strpos($oPageContent2,$chunk) !== FALSE ) {
-                                        $tmp_longest_start = $i;
-                                        $tmp_longest_length = strlen($chunk) - 1;
-                                        if ( $tmp_longest_length > $longest_length ) {
-                                                $longest_start = $tmp_longest_start;
-                                                $longest_length = $tmp_longest_length;
-                                        }
-                                        if ( $stop == 1 ) { break; }
+                                if ( $stop == 1 ) {
+                                        break;
                                 }
-                                else { break; }
+                        }
+                        else {
+                                break;
                         }
                 }
 
-                if ( $longest_start < 0 ) { break; }
+                if ( $longest_start < 0 ) {
+                        break;
+                }
 
                 $segments[$segment_count] = $longest_start . "for" . $longest_length;
                 $segment_count++;
