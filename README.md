@@ -1,4 +1,2 @@
-SampleCode
+Miscellaneous Sample Code
 ==========
-
-Miscellaneous sample code
