@@ -4,9 +4,8 @@
 
 Custom DIFF algorithm
 
-This compares 2 text pages and shows the differences between them, performing a similar function to the
-Linux/Unix "diff" utility.  This was done as a problem-solving exercise, not for production use.  Its
-performance was not optimized for production use.
+You've used the Diff function in Linux or GitHub.  Ever try to write your own?  This was a fun problem-solving
+exercise, although it didn't result in optimal performance for production use.
 
 Phase 1 of 2
 
