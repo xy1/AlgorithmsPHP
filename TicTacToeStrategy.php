@@ -65,21 +65,21 @@ class Board {
 
 		$points = 0;
 
-		// check 3 columns
+		// check all 3 columns
 		for ($i = 0; $i < 3; $i++) {
 			$column_total = array_sum($matrix_checking[$i]);
 			$points += $this->RateRow($column_total);
 			if ($this->debug == 2) echo "(" . $column_total . "->" . $this->RateRow($column_total) . ")";
 		}
 
-		// check 3 rows
+		// check all 3 rows
 		for ($j = 0; $j < 3; $j++) {
 			$row_total = $matrix_checking[0][$j] + $matrix_checking[1][$j] + $matrix_checking[2][$j];
 			$points += $this->RateRow($row_total);
 			if ($this->debug == 2) echo "(" . $row_total . "->" . $this->RateRow($row_total) . ")";
 		}
 
-		// check 2 diagonals
+		// check both diagonals
 
 		$diagonal_1_total = $matrix_checking[0][0] + $matrix_checking[1][1] + $matrix_checking[2][2];
 		$points += $this->RateRow($diagonal_1_total);
