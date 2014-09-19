@@ -3,7 +3,7 @@
 /*
  * Choose strategic Tic Tac Toe move for any given board arrangement.
  *
- * The AI models 1 subsequent (worst-case) opponent's move when selecting best move.
+ * The AI also models 1 subsequent (worst-case) opponent's move when selecting best move.
  */
 
 class Board {
