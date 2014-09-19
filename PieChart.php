@@ -1,26 +1,3 @@
-<style>
-/* basic style definitions to illustrate */
-.pie {
-	fill: #FFFFFF;
-	opacity: 0.66;
-}
-.pie_chart_title {
-	font-family: 'Verdana';
-	font-size: 18px;
-	fill: #224E00;
-	font-weight: 600;
-}
-.pie_slice {
-	fill: #BD854B;
-	stroke-width: 0;
-	stroke: #2F5B00;
-}
-.pie_chart_slice_label {
-	font-family: 'Verdana';
-	font-size: 12px;
-	fill: #2F5B00;
-}
-</style>
 <?php
 
 class piechart {
@@ -149,3 +126,26 @@ $piechart->Draw();
 $piechart->WriteTitle('Sales Month-to-Date by State');
 
 ?>
+<style>
+/* basic style definitions for illustration */
+.pie {
+	fill: #FFFFFF;
+	opacity: 0.66;
+}
+.pie_chart_title {
+	font-family: 'Verdana';
+	font-size: 18px;
+	fill: #224E00;
+	font-weight: 600;
+}
+.pie_slice {
+	fill: #BD854B;
+	stroke-width: 0;
+	stroke: #2F5B00;
+}
+.pie_chart_slice_label {
+	font-family: 'Verdana';
+	font-size: 12px;
+	fill: #2F5B00;
+}
+</style>
