@@ -142,5 +142,4 @@ $net->ShowClientNetwork($netname);
 // Show network details
 $net->ShowClientNetworkDetails($netname);
 
-
 ?>
