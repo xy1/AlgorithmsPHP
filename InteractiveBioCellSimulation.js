@@ -695,4 +695,4 @@ Host Strength: <span id=chewedscore></span>
 <br/><br/>
 <input type=button id=inctemp name=inctemp value='Increase Temperature' onclick='ToggleTemp(0.5)' class='buttonstyle'>
 <input type=button id=dectemp name=dectemp value='Decrease Temperature' onclick='ToggleTemp(1);' class='buttonstyle' style='display: none;'>
-</div>
+</div> 
