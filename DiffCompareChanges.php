@@ -126,11 +126,11 @@ function HighlightDifferences( $oPageContent1, $oPageContent2 ) {
         return $oPageContent1;
 }
 
-$oPageContent1 = "oh the apple beta circus dog";
-$oPageContent2 = "oh the pear beta circus cat";
+$oPageContent1 = "the apple beta circus dog";
+$oPageContent2 = "the pear beta circus cat";
 
-$oPageContent1 = "BBB Smart Investing is a new consumer education program to provide investors with the necessary tools and resources to make informed decisions and avoid scams.";
-$oPageContent2 = "BBB Smart Investing is a new corporate education program to provide investors with the necessary tools and resources to make informed decisions and avoid scams.";
+$oPageContent1 = "Smart Investing is a new consumer education program to provide investors with the necessary tools and resources to make informed decisions and avoid scams.";
+$oPageContent2 = "Smart Investing is a new corporate education program to provide investors with the necessary tools and resources to make informed decisions and avoid scams.";
 
 echo "original 1: " . $oPageContent1 . "\n";
 echo "original 2: " . $oPageContent2 . "\n";
