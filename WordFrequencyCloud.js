@@ -1,5 +1,4 @@
-<a href="
-javascript: ( function () {
+( function () {
 
 	/*
 	 *
@@ -95,9 +94,3 @@ javascript: ( function () {
 
 
 }() );
-">
-Bookmarklet
-</a>
-<p>
-This is some random text in the body of the page.
-</p>
