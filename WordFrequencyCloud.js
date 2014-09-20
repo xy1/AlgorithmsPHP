@@ -85,7 +85,7 @@ function () {
 	/* display words and frequencies in word cloud style */
 	var font_size;
 	for (i = 0; i < words_final.length; i++) {
-		font_size = 10 + (word_frequencies[i] * 2);  /* calculate variable font size based on frequency */
+		font_size = 10 + (word_frequencies[i] * 2);  /* calculate varying font size based on frequency */
 		document.write('<span style=\'font-size: ' + font_size + 'px;\'>');
 		document.write(words_final[i] + ' ');
 		document.write('</span>');
