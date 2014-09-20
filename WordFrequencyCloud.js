@@ -4,9 +4,9 @@
  *
  * Assignment:
  * 1. Write a bookmarklet that analyzes the current page and determines the frequency of word usage.
- * 2. Create a tag presentation like http://en.wikipedia.org/wiki/File:State_of_the_union_word_clouds.png with
+ * 2. Create a presentation like http://en.wikipedia.org/wiki/File:State_of_the_union_word_clouds.png with
  * 	the words in an alphabetized list, showing more frequently used words in larger fonts. 
- * 3. Ignore all words under four characters in length - for example, words like "a", "an", "the" would all be ignored.
+ * 3. Ignore all words under four characters in length.
  *
  * Assumptions:
  * - HTML tags and JavaScript will be included in the analysis.
