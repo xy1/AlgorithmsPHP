@@ -5,7 +5,8 @@
  * Custom DIFF algorithm - compare changes between 2 files
  *
  * You've used the DIFF function in Linux or GitHub.  Ever try to write your own?  This was a fun problem-solving
- * exercise.  I spent about 8 hours on it.
+ * exercise.  I spent about 8 hours on it.  If I get more time, I'd like to optimize its performance more.
+ * (Right now, it's mostly a proof-of-concept.)  I got the inspiration for this from a post that I saw online.
  *
  * Phase 1 of 2
  *
@@ -128,8 +129,10 @@ function HighlightDifferences( $oPageContent1, $oPageContent2 ) {
 $oPageContent1 = "the apple beta circus dog";
 $oPageContent2 = "the pear beta circus cat";
 
-$oPageContent1 = "Smart Investing is a new consumer education program to provide investors with the necessary tools and resources to make informed decisions and avoid scams.";
-$oPageContent2 = "Smart Investing is a new corporate education program to provide investors with the necessary tools and resources to make informed decisions and avoid scams.";
+$oPageContent1 = "Smart Investing is a new consumer education program to provide investors with necessary tools " .
+    "to make informed decisions.";
+$oPageContent2 = "Smart Investing is a new corporate education program to provide investors with necessary tools " .
+    "to make informed decisions.";
 
 echo "original 1: " . $oPageContent1 . "\n";
 echo "original 2: " . $oPageContent2 . "\n";
