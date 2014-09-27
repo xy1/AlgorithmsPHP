@@ -1,14 +1,14 @@
 /*
  *
- * Bookmarklet to generate word cloud based on frequencies of words in current document.
+ * Generate word cloud based on frequencies of words in current document.
  *
- * Assignment:
- * 1. Write a bookmarklet that analyzes the current page and determines the frequency of word usage.
- * 2. Create a presentation like http://en.wikipedia.org/wiki/File:State_of_the_union_word_clouds.png with
- * 	the words in an alphabetized list, showing more frequently used words in larger fonts. 
- * 3. Ignore all words under four characters in length.
+ * This was a timed assignment that I raced to complete in under 3 hours.
+ * It works, but if I had more time, I would have wrapped it in a JavaScript prototype class.
+ * For some reason, I also struggled with manipluating multi-dimensional arrays in JavaScript
+ * so I had to split the results into 2 parallel arrays.
  *
  * Assumptions:
+ * - Ignore all words under 4 characters in length.
  * - HTML tags and JavaScript will be included in the analysis.
  * - Words will be treated case-insensitively.
  * - All compound words that contain hyphens, apostrophes, or other punctuation will be treated as separate words.
