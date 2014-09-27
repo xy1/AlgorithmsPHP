@@ -5,10 +5,12 @@
  * Rotate a square matrix, of any size, clockwise or counterclockwise 90 degrees
  *
  * This was a fun exercise inspired by an idea that I saw online.
- * I spent only several hours on it.
+ * I spent only 3 or 4 hours on it one evening.
  *
- * I originally tried a "layering" approach, but then stumbled onto quick transformation
- * formulas (probably easy for someone up on their coordinate geometry?).
+ * I originally tried a "layering" approach, but then stumbled onto a much quicker approach
+ * using simple formulas to transform the X and Y coordinates (probably easy for someone more
+ * up on their coordinate geometry).  Eventually, it would be fun to allow rotating by any
+ * number of degrees.
  *
  */
 
