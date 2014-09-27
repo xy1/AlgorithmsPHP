@@ -6,10 +6,10 @@ class piechart {
 	private $data;
 	private $total_amount;
 
-	// geometric elements, overridable 
-	public $container_height = 400;
-	public $container_width = 400;
-	public $radius = 100;
+	// geometric elements
+	private $container_height = 400;
+	private $container_width = 400;
+	private $radius = 100;
 
 	// geometric elements, internal
 	private $center_x;
@@ -121,7 +121,6 @@ $data = array(
 );
 
 $piechart = new piechart($data);
-$piechart->radius = 130;  // example of overriding default radius to enlarge
 $piechart->Draw();
 $piechart->WriteTitle('Sales Month-to-Date by State');
 
@@ -149,4 +148,3 @@ $piechart->WriteTitle('Sales Month-to-Date by State');
 	fill: #2F5B00;
 }
 </style>
- 
