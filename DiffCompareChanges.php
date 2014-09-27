@@ -5,8 +5,8 @@
  * Custom DIFF algorithm - compare changes between 2 files
  *
  * You've used the DIFF function in Linux or GitHub.  Ever try to write your own?  This was a fun problem-solving
- * exercise.  I spent about 8 hours on it.  If I get more time, I'd like to optimize its performance more.
- * (Right now, it's mostly a proof-of-concept.)  I got the inspiration for this from a post that I saw online.
+ * exercise.  I spent about 8 hours on it.  When I get more time, I'll optimize its performance more.
+ * I got the inspiration for this from a post that I saw online.
  *
  * Phase 1 of 2
  *
