@@ -2,8 +2,23 @@
 
 /*
  * Choose strategic Tic Tac Toe move for any given board arrangement.
+ * This would be the core strategy logic of a computer Tic Tac Toe game.
  *
- * The AI also models 1 subsequent (worst-case) opponent's move when selecting our best move.
+ * I spent one long evening on this.
+ *
+ * The artificial intelligence not only examines the current board, but also models
+ * all possible moves that the opponent could take (after each of our possible moves),
+ * and factors those into the decision.
+ *
+ * I got the idea for using octal notation (4 for an X and 1 for an O) based on
+ * Linux file permissions (4 for Read, 2 for Write, and 1 for Execure), allowing
+ * me to mathematically sum any row or column without having to check each slot.
+ *
+ * If I get more time at some point, I might have it model 2, 3, or X moves into the
+ * future, as well as build it into a full-fledged game.  It would also be fun to
+ * allow 4x4 or other custom board sizes.  We could also have custom symbols other
+ * than Xs or Os (or in this case, 4s and 1s).
+ *
  */
 
 class Board {
