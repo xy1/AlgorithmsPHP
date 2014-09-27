@@ -5,7 +5,10 @@
  * Draw a pie chart using Scalable Vector Graphics (SVG).
  *
  * This is a piece of a custom library for a custom data analytics application that I built for work.
- * I spent about 1 work day writing and testing this.
+ * I spent about 8 hours writing and testing this to make a workable version.
+ *
+ * I had to look up the trigonometric formula online.
+ * Eventually, the class will accept parameters to override default settings for container size.
  *
  */
 
@@ -122,10 +125,10 @@ class piechart {
 
 // define sample data
 $data = array(
-	array('Texas', 849),
+	array('Alaska', 849),
 	array('New York', 1122),
 	array('California', 2345),
-	array('Florida', 445),
+	array('Texas', 445),
 	array('Colorado', 1833),
 );
 
