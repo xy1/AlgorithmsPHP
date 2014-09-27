@@ -1,7 +1,15 @@
 <?php
 
 /*
- * Rotate a square matrix of any size clockwise or counterclockwise 90 degrees
+ *
+ * Rotate a square matrix, of any size, clockwise or counterclockwise 90 degrees
+ *
+ * This was a fun exercise inspired by an idea that I saw online.
+ * I spent only several hours on it.
+ *
+ * I originally tried a "layering" approach, but then stumbled onto quick transformation
+ * formulas (probably easy for someone up on their coordinate geometry?).
+ *
  */
 
 class Matrix {
