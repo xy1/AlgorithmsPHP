@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *
+ * Draw a pie chart using Scalable Vector Graphics (SVG).
+ *
+ * This is a piece of a custom library for a custom data analytics application that I built for work.
+ * I spent about 1 work day writing and testing this.
+ *
+ */
+
 class piechart {
 
 	// data elements
