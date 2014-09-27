@@ -5,6 +5,8 @@ Exercise: "Create a new Request Header based on the clients IP address in order 
 Based on the value and existence of this request header modify the page output to show certain values about the clients network. (Pick any sample values you might think are valuable.)
 Make sure that you don't serve the incorrect page contents to any user.
 Use at least 4 different carrier networks."
+
+I spent 1 evening on this.
 */
 
 $UseCustomHeader = 1;   // setting to indicate using custom header (1 or 0) rather than REMOTE_ADDR header
