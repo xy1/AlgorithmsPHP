@@ -4,7 +4,7 @@
  *
  * Draw a pie chart using Scalable Vector Graphics (SVG).
  *
- * This is a piece of a custom library for a custom data analytics application that I built for work.
+ * This is a component in a custom library for a data analytics application that I built for work.
  * I spent about 8 hours writing and testing this to make a workable version.
  *
  * I had to look up the trigonometric formula online.
@@ -17,6 +17,7 @@ class piechart {
 	// data elements
 	private $data;
 	private $total_amount;
+	private $html;
 
 	// geometric elements
 	private $container_height = 400;
@@ -50,9 +51,9 @@ class piechart {
 		$this->center_y = ($this->container_height / 2);
 	}
 
-	function Draw() {
-		echo "<svg height=" . $this->container_height . " width=" . $this->container_width . " >";
-		echo "<circle class='pie' r=" . $this->radius . " cx=" . $this->center_x . " cy=" . $this->center_y . "' />";
+	function Draw($title) {
+		$this->html = "<svg height=" . $this->container_height . " width=" . $this->container_width . " >";
+		$this->html .= "<circle class='pie' r=" . $this->radius . " cx=" . $this->center_x . " cy=" . $this->center_y . "' />";
 
 		$this->position = 0;  // start at 0%		
 		foreach ($this->data as $k => $fields) {  // each slice
@@ -69,6 +70,10 @@ class piechart {
 			// set position to endpoint for next slice
 			$this->position = $position_to;
 		}
+
+		$this->WriteTitle($title);
+		$this->html .= "</svg>";
+		return $this->html;
 	}
 	
 	function DrawSlice($from, $to, $label) {
@@ -94,31 +99,27 @@ class piechart {
 		$label_y = $this->center_y + ($this->radius * sin($radians));
 
 		// draw slice
-		echo "<polygon class='pie_slice' " .
+		$this->html .= "<polygon class='pie_slice' " .
 			" points='" . $this->center_x . "," . $this->center_y . " ";
 		for ($i = 0; $i <= $count; $i++) {
-			echo $points_x[$i] . "," . $points_y[$i] . " ";
+			$this->html .= $points_x[$i] . "," . $points_y[$i] . " ";
 		}
 		// fade opacity to visually distinguish slices
 		// based on distance around curve from slice's midpoint (x%) to the start point (0%). 
-		echo "' style='opacity:" . (1.00 - ( $mid * 1.0)) . ";' />";
+		$this->html .= "' style='opacity:" . (1.00 - ( $mid * 1.0)) . ";' />";
 
 		// draw label
-		echo "<text class=pie_chart_slice_label " .
+		$this->html .= "<text class=pie_chart_slice_label " .
 			" x=" . $label_x . " y=" . $label_y .
 			">" . $label . "</text>";
 	}
 	
 	function WriteTitle($title) {
 		// center title below chart
-		echo "<text class=pie_chart_title " .
+		$this->html .= "<text class=pie_chart_title " .
 			" x=" . ( ($this->container_width / 2) - (strlen($title) / 2) * 9 ) .
 			" y=" . ($this->container_height - 9) . " " .
 			">" . $title . "</text>";
-	}
-
-	function __destruct() {
-		echo "</svg>";
 	}
 }
 
@@ -133,12 +134,12 @@ $data = array(
 );
 
 $piechart = new piechart($data);
-$piechart->Draw();
-$piechart->WriteTitle('Sales Month-to-Date by State');
+$html = $piechart->Draw('Sales Month-to-Date by State');
+echo $html;
 
 ?>
 <style>
-/* basic style definitions for illustration */
+/* sample style definitions for illustration purposes */
 .pie {
 	fill: #FFFFFF;
 	opacity: 0.66;
