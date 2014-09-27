@@ -1,41 +1,40 @@
 <?php
 
 /*
-
-Custom DIFF algorithm
-
-You've used the Diff function in Linux or GitHub.  Ever try to write your own?  This was a fun problem-solving
-exercise.  I spent about 8 hours on it.
-
-Phase 1 of 2
-
-Go through string 1, letter by letter, find the longest substring (starting from that position) contained anywhere
-in string 2.  If it's also contained in string 2, it is referred to as a "common section".  Once it checks all
-positions and finds the longest "common section", it saves it (start point and length) to the 1st element in an
-array.  It repeats this process, looking for the next-longest "common section" in the remaining portions of
-string 1.  Note that it skips over (and stops at) those portions of string 1 that have been already designated as
-"common sections".  Once it finds the next-longest "common section", it saves it to the next element in the array.
-It continues like this and stores all the "common sections" in an array.  Once it cannot find any more "common
-sections" (even 1 character in length), it stops iterating.
-
-Phase 2 of 2
-
-Once done iterating, it parses the original string 1 into words (defined by blank spaces or end of string).
-For each word, it notes the starting and ending position of that word.  It looks at each word, and determines if
-that entire word falls inside any "common section" (based on its start and end points).  If so, then the word is
-good.  If not, them the word is bad.  Good words are left alone.  Bad words are replaced with capital letters.
-
-Function returns a translated string.
-Function is run twice: once to highlight the differences in string 1 and once to do so for string 2.
-
-*/
+ *
+ * Custom DIFF algorithm - compare changes between 2 files
+ *
+ * You've used the DIFF function in Linux or GitHub.  Ever try to write your own?  This was a fun problem-solving
+ * exercise.  I spent about 8 hours on it.
+ *
+ * Phase 1 of 2
+ *
+ * Go through string 1, letter by letter, find the longest substring (starting from that position) contained anywhere
+ * in string 2.  If it's also contained in string 2, it is referred to as a "common section".  Once it checks all
+ * positions and finds the longest "common section", it saves it (start point and length) to the 1st element in an
+ * array.  It repeats this process, looking for the next-longest "common section" in the remaining portions of
+ * string 1.  Note that it skips over (and stops at) those portions of string 1 that have been already designated as
+ * "common sections".  Once it finds the next-longest "common section", it saves it to the next element in the array.
+ * It continues like this and stores all the "common sections" in an array.  Once it cannot find any more "common
+ * sections" (even 1 character in length), it stops iterating.
+ *
+ * Phase 2 of 2
+ *
+ * Once done iterating, it parses the original string 1 into words (defined by blank spaces or end of string).
+ * For each word, it notes the starting and ending position of that word.  It looks at each word, and determines if
+ * that entire word falls inside any "common section" (based on its start and end points).  If so, then the word is
+ * good.  If not, them the word is bad.  Good words are left alone.  Bad words are replaced with capital letters.
+ *
+ * Function returns a translated string.
+ * Function is run twice: once to highlight the differences in string 1 and once to do so for string 2.
+ *
+ */
 
 function HighlightDifferences( $oPageContent1, $oPageContent2 ) {
         $l = strlen($oPageContent1);
 
         $segments = array ();
         $segment_count = 0;
-
 
         $i = 0;
         $j = 0;
