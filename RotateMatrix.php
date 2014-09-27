@@ -5,26 +5,30 @@
  */
 
 class Matrix {
-	public $matrix;
+	private $matrix;
 	private $matrix_new;
-	private $debug = 0;
+	private $debug = 1;
 	private $LENGTH_OF_SIDE;
 	private $center_x;
 	private $center_y;
 
-	function __construct($LENGTH_OF_SIDE) {
+	function __construct($matrix) {
+		$this->matrix = $matrix;
+
 		// assign length of side from parameter
-		$this->LENGTH_OF_SIDE = $LENGTH_OF_SIDE;
+		$this->LENGTH_OF_SIDE = count($matrix);
 
 		// show length of side
 		if ($this->debug) echo "Length of side is: " . $this->LENGTH_OF_SIDE . "\n";
 
-		// initialize matrix with values counting left-to-right then top-to-bottom
-		$xcount = 0;
-		for ($i = 0; $i < $this->LENGTH_OF_SIDE; $i++) {
-			for ($j = 0; $j < $this->LENGTH_OF_SIDE; $j++) {
-				$xcount++;
-				$this->matrix[$i][$j] = $xcount;
+		// if not passed in instantiation, initialize matrix with values counting left-to-right/top-to-bottom
+		if (! $matrix) {
+			$xcount = 0;
+			for ($i = 0; $i < $this->LENGTH_OF_SIDE; $i++) {
+				for ($j = 0; $j < $this->LENGTH_OF_SIDE; $j++) {
+					$xcount++;
+					$this->matrix[$i][$j] = $xcount;
+				}
 			}
 		}
 
@@ -45,9 +49,11 @@ class Matrix {
 				$y_distance = $this->center_y - $j;
 
 				// transform by exchanging x and y distances and then negating the new x distance
-				//    for example, a point 3 spaces behind the center and 2 spaces below the center will be moved to the new point
-				//    that is 2 spaces above the center and 3 spaces behind the center
-				$this->matrix_new[$this->center_x + ($y_distance * -1)][$this->center_y + $x_distance] = $this->matrix[$i][$j];
+				//    for example, a point 3 spaces behind the center and 2 spaces below the center
+				//    will be moved to the new point that is 2 spaces above the center and 3 spaces
+				//    behind the center
+				$this->matrix_new[$this->center_x + ($y_distance * -1)][$this->center_y + $x_distance] =
+					$this->matrix[$i][$j];
 			}
 		}
 		$this->matrix = $this->matrix_new;
@@ -62,9 +68,11 @@ class Matrix {
 				$y_distance = $this->center_y - $j;
 
 				// transform by exchanging x and y distances and then negating the new y distance
-				//    for example, a point 3 spaces behind the center and 2 spaces below the center will be moved to the new point
-				//    that is 2 spaces below the center and 3 spaces ahead of the center
-				$this->matrix_new[$this->center_x + $y_distance][$this->center_y + ($x_distance * -1)] = $this->matrix[$i][$j];
+				//    for example, a point 3 spaces behind the center and 2 spaces below the center
+				//    will be moved to the new point that is 2 spaces above the center and 3 spaces
+				//    behind the center
+				$this->matrix_new[$this->center_x + $y_distance][$this->center_y + ($x_distance * -1)] =
+					$this->matrix[$i][$j];
 			}
 		}
 		$this->matrix = $this->matrix_new;
@@ -81,7 +89,22 @@ class Matrix {
 	}
 }
 
-$Matrix = new Matrix(7);
+/*
+$Matrix = new Matrix(
+	array(
+		array(1, 2, 3),
+		array(4, 5, 6),
+		array(7, 8, 9),
+	)
+);
+*/
+$Matrix = new Matrix(
+	array(
+		array(9, 8, 7),
+		array(6, 5, 4),
+		array(3, 2, 1),
+	)
+);
 echo "Original matrix:\n";
 $Matrix->Display();
 $Matrix->RotateClockwise90Degrees();
@@ -130,6 +153,6 @@ Rotated Counterclockwise again:
  3  10  17  24  31  38  45  
  2   9  16  23  30  37  44  
  1   8  15  22  29  36  43  
+*/
 
 ?>
- 
