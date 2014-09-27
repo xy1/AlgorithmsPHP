@@ -3,12 +3,14 @@
 /*
  *
  * Draw a pie chart using Scalable Vector Graphics (SVG).
+ * Pass it values and it automatically calculates the dimensions, appearance, and labels for the chart.
  *
  * This is a component in a custom library for a data analytics application that I built for work.
  * I spent about 8 hours writing and testing this to make a workable version.
  *
- * I had to look up the trigonometric formula online.
- * Eventually, the class will accept parameters to override default settings for container size.
+ * Note that I had to look up the trigonometric formula online (I learned trigonometry a while ago).
+ * This version uses default pixel settings for container size but those are overridabe/scalable for
+ * responsive design in another version.
  *
  */
 
