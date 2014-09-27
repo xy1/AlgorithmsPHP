@@ -5,7 +5,7 @@
 Custom DIFF algorithm
 
 You've used the Diff function in Linux or GitHub.  Ever try to write your own?  This was a fun problem-solving
-exercise.
+exercise.  I spent about 8 hours on it.
 
 Phase 1 of 2
 
