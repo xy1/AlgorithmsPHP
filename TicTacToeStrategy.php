@@ -3,25 +3,29 @@
 /*
  * Choose strategic Tic Tac Toe move for any given board arrangement.
  *
- * The AI also models 1 subsequent (worst-case) opponent's move when selecting best move.
+ * The AI also models 1 subsequent (worst-case) opponent's move when selecting our best move.
  */
 
 class Board {
-	// board values
+	// board values (use octal notation)
 	// 	0: slot is empty
 	//	1: slot is occupied by opponent
 	//	4: slot is occupied by us
 
-	public $matrix;
-	private $matrix_temp;
-	private $matrix_temp_2;
+	private $matrix;
+	private $matrix_1st_move;
+	private $matrix_2nd_move;
 	private $debug = 0;
 
-	function __construct() {
-		// initialize matrix
-		for ($i = 0; $i < 3; $i++) {
-			for ($j = 0; $j < 3; $j++) {
-				$this->matrix[$i][$j] = 0;
+	function __construct($matrix) {
+		$this->matrix = $matrix;
+
+		// initialize matrix if not passed as parameter
+		if (! $matrix) {
+			for ($i = 0; $i < 3; $i++) {
+				for ($j = 0; $j < 3; $j++) {
+					$this->matrix[$i][$j] = 0;
+				}
 			}
 		}
 	}
@@ -31,29 +35,34 @@ class Board {
 		for ($i = 0; $i < 3; $i++) {
 			for ($j = 0; $j < 3; $j++) {
 				if ($this->matrix[$i][$j] == 0) {  // if empty slot
-					$this->matrix_temp = $this->matrix;  // copy current matrix into temp matrix
-					$this->matrix_temp[$i][$j] = 4;  // we take slot in temp matrix
+					$this->matrix_1st_move = $this->matrix;  // copy current matrix into temp matrix
+					$this->matrix_1st_move[$i][$j] = 4;  // we take slot in temp matrix
 
 					// evaluate what opponent would do next (worst-case/lowest points for us)
 					$opponent_best_option_so_far_points = 1000000;
 					for ($k = 0; $k < 3; $k++) {
 						for ($l = 0; $l < 3; $l++) {
-							$this->matrix_temp_2 = $this->matrix_temp;  // copy current temp matrix into 2nd temp matrix
-							if ($this->matrix_temp_2[$k][$l] == 0) {  // if empty slot
-								$this->matrix_temp_2[$k][$l] = 1;  // have opponent take slot in 2nd temp matrix
-								$points = $this->RateBoard($this->matrix_temp_2);
-								if ($points < $opponent_best_option_so_far_points)  // if worse for us
+							// copy current temp matrix into 2nd temp matrix
+							$this->matrix_2nd_move = $this->matrix_1st_move;
+							if ($this->matrix_2nd_move[$k][$l] == 0) {  // if empty slot
+								// have opponent take slot in 2nd temp matrix
+								$this->matrix_2nd_move[$k][$l] = 1;
+								$points = $this->RateBoard($this->matrix_2nd_move);
+								// if worse for us
+								if ($points < $opponent_best_option_so_far_points)
 									$opponent_best_option_so_far_points = $points;
 							}
 						}
 					}
 
 					if ($this->debug)
-						echo "move " . $i . "," . $j . " would be worth " . $opponent_best_option_so_far_points . " points\n";
+						echo "move " . $i . "," . $j . " would be worth " .
+							$opponent_best_option_so_far_points . " points\n";
 
 					// assign new best move, if warranted
 					if ($opponent_best_option_so_far_points > $best_option_so_far['points'])
-						$best_option_so_far = array('move' => $i . ',' . $j, 'points' => $opponent_best_option_so_far_points);
+						$best_option_so_far = array('move' => $i . ',' . $j,
+							'points' => $opponent_best_option_so_far_points);
 				}
 			}
 		}
@@ -112,6 +121,13 @@ class Board {
 		else return 0;
 	}
 
+	function TakeMove($move) {
+		$parsed_move = explode(",", $move['move']);
+		$new_x = $parsed_move[0];
+		$new_y = $parsed_move[1];
+		$this->matrix[$new_x][$new_y] = 4;
+	}
+
 	function Display() {
 		for ($i = 0; $i < 3; $i++) {
 			for ($j = 0; $j < 3; $j++) {
@@ -128,13 +144,12 @@ class Board {
 	}
 }
 
-$Board = new Board();
-
-// assign initial board selections
-$Board->matrix = array(
-	array(4, 4, 1),
-	array(0, 0, 0),
-	array(0, 0, 1),
+$Board = new Board(
+	array(
+		array(4, 4, 1),
+		array(0, 0, 0),
+		array(0, 0, 1),
+	)
 );
 
 // display original board
@@ -146,39 +161,38 @@ $move = $Board->ChooseMove();
 echo "Best move would be: " . $move['move'] . "\n";
 
 // assign best move to board
-$parsed_move = explode(",", $move['move']);
-$new_x = $parsed_move[0];
-$new_y = $parsed_move[1];
-$Board->matrix[$new_x][$new_y] = 4;
+$Board->TakeMove($move);
 
 // display new board
 echo "New board:\n";
 $Board->Display();
 
 /*
-sample output:
 
-Original board:
-4 0 1 
-4 0 0 
-0 0 1 
-Best move would be: 2,0
-New board:
-4 0 1 
-4 0 0 
-4 0 1 
+sample output 1:
 
-Original board:
-4 4 1 
-0 0 0 
-0 0 1 
-Best move would be: 1,2
-New board:
-4 4 1 
-0 0 4 
-0 0 1 
+	Original board:
+	4 0 1 
+	4 0 0 
+	0 0 1 
+	Best move would be: 2,0
+	New board:
+	4 0 1 
+	4 0 0 
+	4 0 1 
+
+sample output 2:
+
+	Original board:
+	4 4 1 
+	0 0 0 
+	0 0 1 
+	Best move would be: 1,2
+	New board:
+	4 4 1 
+	0 0 4 
+	0 0 1 
 
 */
 
 ?>
- 
