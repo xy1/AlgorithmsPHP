@@ -3,14 +3,12 @@
 /*
  *
  * Draw a pie chart using Scalable Vector Graphics (SVG).
- * Pass it values and it automatically calculates the dimensions, appearance, and labels for the chart.
+ * Pass it data values and it will automatically calculate and render the chart.
  *
  * This is a component in a custom library for a data analytics application that I built for work.
  * I spent about 8 hours writing and testing this to make a workable version.
  *
- * Note that I had to look up the trigonometric formula online (I learned trigonometry a while ago).
- * This version uses default pixel settings for container size but those are overridabe/scalable for
- * responsive design in another version.
+ * The production version of this allows passing the container size in a responsive design approach.
  *
  */
 
@@ -140,6 +138,7 @@ $html = $piechart->Draw('Sales Month-to-Date by State');
 echo $html;
 
 ?>
+
 <style>
 /* sample style definitions for illustration purposes */
 .pie {
