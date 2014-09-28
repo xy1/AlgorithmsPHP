@@ -14,7 +14,7 @@
  *
  */
 
-class piechart {
+class PieChart {
 
 	// data elements
 	private $data;
@@ -135,7 +135,7 @@ $data = array(
 	array('Colorado', 1833),
 );
 
-$piechart = new piechart($data);
+$piechart = new PieChart($data);
 $html = $piechart->Draw('Sales Month-to-Date by State');
 echo $html;
 
