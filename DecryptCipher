@@ -100,11 +100,12 @@ class Cipher {
     
     private function TransposeIntoColumns($matrix, $keyword) {
         $length = strlen($keyword);
+        $num_lines = count($matrix);
         $newmatrix = array();
         for ($j = 0; $j < $length; $j++) {
             $this_char = substr($keyword, $j, 1);
             $newmatrix[$this_char] = "";
-            for ($l = 0; $l <= $line; $l++) {
+            for ($l = 0; $l <= $num_lines; $l++) {
                 $newmatrix[$this_char] .= $matrix[$l][$j];
             }
         }
