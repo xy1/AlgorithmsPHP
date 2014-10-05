@@ -3,9 +3,10 @@
 /*
  * Decrypt cipher
  *
- * This 7/2013 HackerRank challenge was to decrypt a cipher that arranges the letters of the alphabet that
- * don't appear in the keyword into columns below the letters of a keyword.  For example, we take a keyword
- * "SECRET" (remove duplicate letters) and arrange as follows:
+ * This is a solution to a 7/2013 HackerRank challenge that took me several hours to complete.
+ * The challenge was to decrypt a cipher that arranges the letters of the alphabet that don't appear in the
+ * keyword into columns below the letters of a keyword.  For example, we take a keyword "SECRET" (remove
+ * duplicate letters) and arrange as follows:
  *
  *     SECRT
  *     ABDFG
