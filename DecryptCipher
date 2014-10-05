@@ -23,93 +23,140 @@
  *
  */
 
-$debug = 0;
-$handle = fopen("php://stdin", "r");
-$T = trim(fgets($handle));
-for ($i = 1; $i <= $T; $i++) {
-    $keyword = trim(fgets($handle));
-    $message = trim(fgets($handle));
-    $length = strlen($keyword);
+class Cipher() {
 
-    // remove duplicate letters from keyword
-    $temp_keyword = "";
-    $keyword_so_far = "";
-    for ($j = 0; $j < $length; $j++) {
-        $this_char = substr($keyword, $j, 1);
-        if (strpos($keyword_so_far, $this_char) === false) $temp_keyword .= $this_char;
-        $keyword_so_far .= $this_char;
+    private function DecryptInput() {
+        $debug = 0;
+        $handle = fopen("php://stdin", "r");
+        $T = trim(fgets($handle));
+    
+        for ($i = 1; $i <= $T; $i++) {
+            $keyword = trim(fgets($handle));
+            $message = trim(fgets($handle));
+
+            $keyword = $this->RemoveDuplicates($keyword);
+            if ($debug) echo $keyword . "\n";
+            
+            $matrix = $this->BuildAlphabetMatrix($keyword);
+            if ($debug) var_dump($matrix);
+            
+            $newmatrix = $this->TransposeIntoColumns($matrix, $keyword);
+            if ($debug) var_dump($newmatrix);
+            
+            $header_string = $this->SortHeaders($keyword);
+            if ($debug) echo $header_string . "\n";
+            
+            $new_alphabet = $this->CreateNewAlphabet($header_string, $newmatrix);
+            if ($debug) echo $new_alphabet . "\n";
+            
+            $decrypted = $this->Translate($message, $new_alphabet);
+            if ($debug) echo $decrypted . "\n";
+            
+            $this->ShowDecrypted($decrypted);
+        }
     }
-    $keyword = $temp_keyword;
-    $length = strlen($keyword); // re-calculate once duplicate letters are removed
-    if ($debug) echo $keyword . "\n";
 
-    // create 1st line of matrix
-    $count = 0;
-    $matrix = [];
-    for ($j = 0; $j < $length; $j++) {
-        $this_char = substr($keyword, $j, 1);
-        $matrix[0][$count] = $this_char;
-        $headers[$count] = $this_char;
-        $count++;
+    private function RemoveDuplicates($word) {
+        $length = strlen($word);
+        $new_word = "";
+        $word_so_far = "";
+        for ($j = 0; $j < $length; $j++) {
+            $this_char = substr($word, $j, 1);
+            if (strpos($word_so_far, $this_char) === false) $new_word .= $this_char;
+            $word_so_far .= $this_char;
+        }
+        return $new_word;
     }
+        
+    private function BuildAlphabetMatrix($keyword) {
+        $length = strlen($keyword);
 
-    // create remaining lines of matrix based on alphabet
-    $line = 1;
-    $count = 0;
-    for ($j = 65; $j <= 90; $j++) {
-        $this_char = chr($j);
-        if (strpos($keyword, $this_char) === false) {
-            $matrix[$line][$count] = $this_char;
+        // create 1st line of matrix
+        $count = 0;
+        $matrix = [];
+        for ($j = 0; $j < $length; $j++) {
+            $this_char = substr($keyword, $j, 1);
+            $matrix[0][$count] = $this_char;
             $count++;
         }
-        if ($count == $length) {
-            $count = 0;
-            $line++;
-        }
-    }
-    if ($debug) var_dump($matrix);
-
-    // transpose into columns
-    $newmatrix = [];
-    for ($j = 0; $j < $length; $j++) {
-        $this_char = substr($keyword, $j, 1);
-        $newmatrix[$this_char] = "";
-        for ($l = 0; $l <= $line; $l++) {
-            $newmatrix[$this_char] .= $matrix[$l][$j];
-        }
-    }
-    if ($debug) var_dump($newmatrix);
-
-    // sort headers
-    sort($headers);
-    $header_string = implode("", $headers);
-    if ($debug) echo $header_string . "\n";
-
-    // compose substitution alphabet by concatenating sorted columns
-    $new_alphabet = "";
-    for ($j = 0; $j < $length; $j++) {
-        $this_char = substr($header_string, $j, 1);
-        $new_alphabet .= $newmatrix[$this_char];
-    }
-    if ($debug) echo $new_alphabet . "\n";
-    if ($debug) echo strlen($new_alphabet) . "\n";
     
-    // translate using substitution alphabet
-    $decrypted = "";
-    $length_message = strlen($message);
-    for ($j = 0; $j < $length_message; $j++) {
-        $this_char = substr($message, $j, 1);
-        if (strpos($new_alphabet, $this_char) === false) {
-            $decrypted .= " ";
-            continue;
+        // create remaining lines of matrix based on alphabet
+        $line = 1;
+        $count = 0;
+        for ($j = 65; $j <= 90; $j++) {
+            $this_char = chr($j);
+            if (strpos($keyword, $this_char) === false) {
+                $matrix[$line][$count] = $this_char;
+                $count++;
+            }
+            if ($count == $length) {
+                $count = 0;
+                $line++;
+            }
         }
-        $position = strpos($new_alphabet, $this_char);
-        if ($debug) echo $position . " ";
-        $decrypted .= chr($position + 65);
+        
+        return $matrix;
     }
-
-    // output
-    echo $decrypted . "\n";
+    
+    private function TransposeIntoColumns($matrix, $keyword) {
+        $length = strlen($keyword);
+        $newmatrix = [];
+        for ($j = 0; $j < $length; $j++) {
+            $this_char = substr($keyword, $j, 1);
+            $newmatrix[$this_char] = "";
+            for ($l = 0; $l <= $line; $l++) {
+                $newmatrix[$this_char] .= $matrix[$l][$j];
+            }
+        }
+        return $newmatrix;
+    }
+    
+    private function SortHeaders($keyword) {
+        $length = strlen($keyword);
+        $count = 0;
+        for ($j = 0; $j < $length; $j++) {
+            $this_char = substr($keyword, $j, 1);
+            $headers[$count] = $this_char;
+            $count++;
+        }
+        sort($headers);
+        $header_string = implode("", $headers);
+        return $header_string;
+    }
+    
+    private function CreateNewAlphabet($header_string, $newmatrix) {
+        // concatenate sorted columns
+        $length = strlen($header_string);
+        $new_alphabet = "";
+        for ($j = 0; $j < $length; $j++) {
+            $this_char = substr($header_string, $j, 1);
+            $new_alphabet .= $newmatrix[$this_char];
+        }
+        return $new_alphabet;
+    }
+        
+    private function Translate($message, $new_alphabet) {
+        $decrypted = "";
+        $length_message = strlen($message);
+        for ($j = 0; $j < $length_message; $j++) {
+            $this_char = substr($message, $j, 1);
+            if (strpos($new_alphabet, $this_char) === false) {
+                $decrypted .= " ";
+                continue;
+            }
+            $position = strpos($new_alphabet, $this_char);
+            $decrypted .= chr($position + 65);
+        }
+        return $decrypted;
+    }
+    
+    private function ShowDecrypted($decrypted) {
+        echo $decrypted . "\n";
+    }
 
 }
+
+$cipher = new Cipher();
+$cipher->DecryptInput();
+
 ?>
