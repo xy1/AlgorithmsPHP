@@ -28,9 +28,9 @@ class Cipher {
     public function DecryptInput() {
         $debug = 0;
         $handle = fopen("php://stdin", "r");
-        $T = trim(fgets($handle));
+        $test_cases = trim(fgets($handle));
     
-        for ($i = 1; $i <= $T; $i++) {
+        for ($j = 1; $j <= $test_cases; $j++) {
             $keyword = trim(fgets($handle));
             $message = trim(fgets($handle));
 
