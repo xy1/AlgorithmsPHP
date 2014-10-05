@@ -23,9 +23,9 @@
  *
  */
 
-class Cipher() {
+class Cipher {
 
-    private function DecryptInput() {
+    public function DecryptInput() {
         $debug = 0;
         $handle = fopen("php://stdin", "r");
         $T = trim(fgets($handle));
@@ -73,7 +73,7 @@ class Cipher() {
 
         // create 1st line of matrix
         $count = 0;
-        $matrix = [];
+        $matrix = array();
         for ($j = 0; $j < $length; $j++) {
             $this_char = substr($keyword, $j, 1);
             $matrix[0][$count] = $this_char;
@@ -100,7 +100,7 @@ class Cipher() {
     
     private function TransposeIntoColumns($matrix, $keyword) {
         $length = strlen($keyword);
-        $newmatrix = [];
+        $newmatrix = array();
         for ($j = 0; $j < $length; $j++) {
             $this_char = substr($keyword, $j, 1);
             $newmatrix[$this_char] = "";
