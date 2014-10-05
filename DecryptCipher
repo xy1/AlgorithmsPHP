@@ -1,7 +1,26 @@
 <?php
 
 /*
- * 
+ * Decrypt cipher
+ *
+ * This 7/2013 HackerRank challenge was to decrypt a cipher that arranges the letters of the alphabet that
+ * don't appear in the keyword into columns below the letters of a keyword.  For example, we take a keyword
+ * "SECRET" (remove duplicate letters) and arrange as follows:
+ *
+ *     SECRT
+ *     ABDFG
+ *     HIJKL
+ *     MNOPQ
+ *     UVWXY
+ *     Z
+ *
+ * And then we sort those columns by the letters in the keyword ("SECRT" is sorted as "CERST"):
+ *
+ *     Original alphabet:        ABCDE FGHIJ KLMNO PQRSTU VWXYZ
+ *     Substitution alphabet:    CDJOW EBINV RFKPX SAHMUZ TGLQY
+ *
+ * For example, message "JHQSU XFXBQ" is translated as "CRYPT OLOGY".
+ *
  */
 
 $debug = 0;
@@ -61,12 +80,12 @@ for ($i = 1; $i <= $T; $i++) {
     }
     if ($debug) var_dump($newmatrix);
 
-    // sort
+    // sort headers
     sort($headers);
     $header_string = implode("", $headers);
     if ($debug) echo $header_string . "\n";
 
-    // compose new alphabet
+    // compose substitution alphabet by concatenating sorted columns
     $new_alphabet = "";
     for ($j = 0; $j < $length; $j++) {
         $this_char = substr($header_string, $j, 1);
@@ -75,7 +94,7 @@ for ($i = 1; $i <= $T; $i++) {
     if ($debug) echo $new_alphabet . "\n";
     if ($debug) echo strlen($new_alphabet) . "\n";
     
-    // translate
+    // translate using substitution alphabet
     $decrypted = "";
     $length_message = strlen($message);
     for ($j = 0; $j < $length_message; $j++) {
@@ -89,6 +108,7 @@ for ($i = 1; $i <= $T; $i++) {
         $decrypted .= chr($position + 65);
     }
 
+    // output
     echo $decrypted . "\n";
 
 }
