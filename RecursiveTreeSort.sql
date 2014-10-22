@@ -1,5 +1,4 @@
 /*
- *
  * Sort tree structure using recursion and SQL cursor
  *
  * Boards have committees.
@@ -18,9 +17,8 @@
  * Acme Company Board|Budget Committee|Tax Investment Subcommittee
  * Acme Company Board|Operations Committee
  * Acme Company Board|Planning Committee
- * Beta Inc Board
+ * Beta Incorporated Board
  * Etc.
- *
  */
 
 /* define a temporary table to store keys for sorting */
