@@ -11,7 +11,7 @@
  * I had the idea to use octal notation (4 for an X and 1 for an O) based on Linux file permissions
  * (4 for Read, 2 for Write, etc.), allowing quick summing of rows and columns without checking each square.
  *
- * It would be fun to expand it to model 2, 3...X moves into the future, allow custom board sizes (ex. 4x4),
+ * It would be fun to expand it to model 2, 3...X moves into the future, allow custom board sizes (ex. 4 x 4),
  * allow custom symbols, etc.
  *
  */
